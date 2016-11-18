@@ -3,8 +3,8 @@
 
 int main() {
 
-    MazeBuilder * mazeBuilder = new MazeBuilder(25,25,1);
-    mazeBuilder->buildMazes();
+    MazeBuilder * mazeBuilder = new MazeBuilder(200,200,30);
+    mazeBuilder->buildMazeStart();
 
     return 0;
 }

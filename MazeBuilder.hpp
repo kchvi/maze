@@ -11,7 +11,9 @@
 #include <cmath>
 #include <cstdlib>
 #include <string>
+#include <time.h>
 
+//static int positionList[4][4]; // For testing randomness
 
 struct Coordinates {
     int x;
@@ -32,8 +34,6 @@ class MazeBuilder {
 
 private:
 
-    std::stack<Cell*> _cellStack;
-
     char **_charGrid;
 
     Cell ***_cellGrid;
@@ -41,6 +41,12 @@ private:
     int _mazeWidth;
     int _mazeHeight;
     int _mazeCount;
+
+    int _charGridWidth;
+    int _charGridHeight;
+
+    Coordinates _startChar{0,0};
+    Coordinates _endChar{0,0};
 
 public:
 
@@ -50,7 +56,6 @@ public:
     MazeBuilder(int, int, int);
 
     /**
-     *
      * Refresh grids for a new maze.
      */
     void refreshGrids();
@@ -58,7 +63,7 @@ public:
     /**
      * Builds the mazes, man.
      */
-    void buildMazes();
+    void buildMazeStart();
 
     /**
      * Recursive method for building a maze.
@@ -66,10 +71,17 @@ public:
      */
     void buildMaze(Cell *nextCell);
 
-
+    /**
+     * Prints character grid
+     * @param num maze number
+     */
     void printCharGrid(int num);
 
-
+    /**
+     * Updates character grid after a move.
+     * @param cell_1 one cell
+     * @param cell_2 two cell
+     */
     void updateCharGrid(Cell *cell_1, Cell *cell_2);
 
 };

@@ -7,8 +7,8 @@
 
 #include "MazeBuilder.hpp"
 
-const Coordinates UP{0, 1};
-const Coordinates DOWN{0, -1};
+const Coordinates UP{0, -1};
+const Coordinates DOWN{0, 1};
 const Coordinates LEFT{-1, 0};
 const Coordinates RIGHT{1, 0};
 
@@ -23,7 +23,7 @@ private:
 public:
 
     /* Constructor */
-    RandomCellList( Cell *currentCell, Cell*** &cellGrid, int width, int height ){
+    RandomCellList( Cell *&currentCell, Cell*** &cellGrid, int width, int height ){
 
         _currentCell = currentCell;
         _cellGrid = cellGrid;
@@ -34,16 +34,32 @@ public:
         Coordinates temp;
         for( int i = 3; i>0; i--){
 
-            int j = rand() % i;
+            int j = rand() % (i+1);
             temp = directions[i];
             directions[i] = directions[j];
             directions[j] = temp;
+
         }
+
+          // For randomness tests
+//        for( int j = 0; j<4; j++) {
+//
+//            if (directions[j].x == UP.x && directions[j].y == UP.y) {
+//                positionList[0][j]++; }
+//            if (directions[j].x == DOWN.x && directions[j].y == DOWN.y) {
+//                positionList[1][j]++; }
+//            if (directions[j].x == LEFT.x && directions[j].y == LEFT.y) {
+//                positionList[2][j]++; }
+//            if (directions[j].x == RIGHT.x && directions[j].y == RIGHT.y) {
+//                positionList[3][j]++; }
+//        }
+
     }
 
-    /* returns a pointer to next cell
-     * There is some redundancy
-     * */
+    /**
+     * Some redundancy. Might use a stack
+     * @return pointer to next cell
+     */
     Cell* next(){
 
         int curX = _currentCell->location.x;
